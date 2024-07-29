@@ -19,7 +19,7 @@ public class MessageListenerTest {
   KafkaCompanion companion;
 
   @Test
-  void testProcessor() {
+  void testEmitInTransaction() {
     companion.produceIntegers().usingGenerator(i -> new ProducerRecord<>("in", i));
 
     ConsumerTask<String, Integer> orders = companion.consumeIntegers().fromTopics("out", 10);
@@ -28,7 +28,7 @@ public class MessageListenerTest {
   }
 
   @Test
-  void testProcessor2() {
+  void testEmitInTransaction2() {
     companion.produceIntegers().usingGenerator(i -> new ProducerRecord<>("in2", i));
 
     ConsumerTask<String, Integer> orders = companion.consumeIntegers().fromTopics("out2", 10);
@@ -37,7 +37,7 @@ public class MessageListenerTest {
   }
 
   @Test
-  void testProcessor3() {
+  void testEmitInTransaction3() {
     companion.produceIntegers().usingGenerator(i -> new ProducerRecord<>("in3", i));
 
     ConsumerTask<String, Integer> orders = companion.consumeIntegers().fromTopics("out3", 10);
