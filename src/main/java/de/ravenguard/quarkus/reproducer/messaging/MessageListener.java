@@ -19,6 +19,12 @@ public class MessageListener {
   @Channel("out3")
   Emitter<Integer> integerEmitter;
 
+  /**
+   * Failing Listener using Kafka Transaction and Mutiny.
+   *
+   * @param message Message from Kafka Topic
+   * @return Uni for Completion
+   */
   @Incoming("in")
   @Retry(delay = 1000)
   public Uni<Void> emitInTransaction(Message<Integer> message) {
@@ -33,6 +39,12 @@ public class MessageListener {
     );
   }
 
+  /**
+   * Successful Listener with Kafka Transaction and without Mutiny.
+   *
+   * @param message Message from Kafka Topic
+   * @return Uni for Completion
+   */
   @Incoming("in2")
   @Retry(delay = 1000)
   public Uni<Void> emitInTransaction2(Message<Integer> message) {
@@ -43,6 +55,12 @@ public class MessageListener {
     );
   }
 
+  /**
+   * Successful Listener without Kafka Transactions and with Mutiny.
+   *
+   * @param message Message from Kafka Topic
+   * @return Uni for Completion
+   */
   @Incoming("in3")
   @Retry(delay = 1000)
   public Uni<Void> emitInTransaction3(Message<Integer> message) {
