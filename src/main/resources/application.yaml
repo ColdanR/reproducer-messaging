@@ -1,0 +1,45 @@
+quarkus:
+  kafka:
+    devservices:
+      provider: strimzi
+      image-name: 'quay.io/strimzi-test-container/test-container:0.107.0-kafka-3.7.1'
+      topic-partitions:
+        in: 3
+        in2: 3
+        in3: 3
+        out: 3
+        out2: 3
+        out3: 3
+mp:
+  messaging:
+    connector:
+      smallrye-kafka:
+        auto:
+          offset:
+            earliest
+    incoming:
+      in:
+        connector: smallrye-kafka
+        value:
+          deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
+      in2:
+        connector: smallrye-kafka
+        value:
+          deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
+      in3:
+        connector: smallrye-kafka
+        value:
+          deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
+    outgoing:
+      out:
+        connector: smallrye-kafka
+        value:
+          serializer: org.apache.kafka.common.serialization.IntegerSerializer
+      out2:
+        connector: smallrye-kafka
+        value:
+          serializer: org.apache.kafka.common.serialization.IntegerSerializer
+      out3:
+        connector: smallrye-kafka
+        value:
+          serializer: org.apache.kafka.common.serialization.IntegerSerializer
